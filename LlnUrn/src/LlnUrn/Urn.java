@@ -68,6 +68,7 @@ public class Urn implements ActionListener {
     private long redBallsExtracted = 0;
     private long blueBallsExtracted = 0;
     private long practicalProbability;
+    private long limit = 100000000;
     
     //CONSTRUCTOR
     public Urn() {
@@ -141,7 +142,7 @@ public class Urn implements ActionListener {
         //extractionsTextField
         extractionsTextField = new JTextField();
         extractionsTextField.setBorder(empty);
-        extractionsTextField.setBounds(135, 50, 70, 20);
+        extractionsTextField.setBounds(135, 50, 100, 20);
         
         //extractionsLabel
         extractionsLabel = new JLabel("Number of extractions:");
@@ -227,6 +228,11 @@ public class Urn implements ActionListener {
             try{
                 
                 numberOfExtractions = Long.parseLong(extractionsTextField.getText());
+                
+                if(numberOfExtractions > limit){
+                    extractionsTextField.setText("Max 100000000");
+                    return;
+                }
                 
                 //to verify the law of large number we need a large number of extractions, the higher the better.
                 if(numberOfExtractions < 500){
